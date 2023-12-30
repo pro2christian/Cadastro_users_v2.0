@@ -10,6 +10,7 @@ namespace Cadastro_users_v2._0
     {
         static void Main(string[] args)
         {
+
         }
     }
 }

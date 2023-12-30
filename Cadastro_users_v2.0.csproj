@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BaseDados.cs" />
     <Compile Include="CadastroCliente.cs" />
+    <Compile Include="Interface_G.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
