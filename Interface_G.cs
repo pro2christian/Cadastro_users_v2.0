@@ -39,6 +39,7 @@ namespace Cadastro_users_v2._0
                 minhaString = temp;
                 retorno = Resultado_e.Sucesso;
             }
+            Console.Clear();
             return retorno;
         }
         public Resultado_e PegaData( ref DateTime data, string mensagemNoMenu)
