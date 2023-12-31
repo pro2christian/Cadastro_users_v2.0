@@ -10,6 +10,9 @@ namespace Cadastro_users_v2._0
     {
         static void Main(string[] args)
         {
+            BaseDados baseDados = new BaseDados();
+            Interface_G CadastraCliente = new Interface_G(baseDados);
+            CadastraCliente.CarregaInterface();
         }
     }
 }
