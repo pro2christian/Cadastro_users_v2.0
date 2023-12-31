@@ -17,7 +17,7 @@ namespace Cadastro_users_v2._0
         public List<CadastroCliente> BuscaCliente_Doc( string pNumeroDocumento)
         {
             List<CadastroCliente> tempCadastroClientes = cadastroCliente.Where(cliente => cliente.NumeroDocumento == pNumeroDocumento).ToList();
-            if (tempCadastroClientes.Count > 0)
+            if (tempCadastroClientes.Count >0)
                 return tempCadastroClientes;
             else
                 return null; 
@@ -27,14 +27,14 @@ namespace Cadastro_users_v2._0
             List<CadastroCliente> tempCadastroClientes = cadastroCliente.Where(cliente => cliente.NumeroDocumento == pNumeroDocumento).ToList();
             if (tempCadastroClientes.Count > 0)
             {
-                foreach(CadastroCliente clienteRemove in tempCadastroClientes)
+                foreach(CadastroCliente excluiCliente in tempCadastroClientes)
                 {
-                    tempCadastroClientes.Remove(clienteRemove);
+                    cadastroCliente.Remove(excluiCliente);
                 }
                 return tempCadastroClientes;
             }
-            else 
-                return null; 
+            else
+                return null;
         }
         public BaseDados()
         {

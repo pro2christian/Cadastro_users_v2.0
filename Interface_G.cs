@@ -106,14 +106,14 @@ namespace Cadastro_users_v2._0
         BaseDados baseDados;
         public Interface_G(BaseDados pBaseDados)
         {
-            pBaseDados = baseDados;
+            baseDados = pBaseDados;
         }
         public void ImprimeNoConsole(CadastroCliente pCliente)
         {
-            ImprimeMensagens("Nome: "+ pCliente.Nome);
+            ImprimeMensagens("Nome: "+ pCliente.Nome.ToUpper());
             ImprimeMensagens("Número do Documento: " + pCliente.NumeroDocumento);
             ImprimeMensagens("Data de Nascimento: "+ pCliente.DataNascimento.ToString("dd/MM/yyyy"));
-            ImprimeMensagens("Nome da Rua: "+ pCliente.NomeRua);
+            ImprimeMensagens("Nome da Rua: "+ pCliente.NomeRua.ToUpper());
             ImprimeMensagens("Numero da Casa: "+ pCliente.NumeroCasa);
         }
         public void ImprimeNoConsole(List<CadastroCliente> pListaCliente)
@@ -136,21 +136,20 @@ namespace Cadastro_users_v2._0
                 return Resultado_e.Sair;
             if (PegaData(ref DataNascimento, "Digite a data de nascimento  no formato DD/MM/AAAA ou S para sair") == Resultado_e.Sair)
                 return Resultado_e.Sair;
-            if (PegaString(ref NumeroDocumento, "Digite o nome completo ou S para sair") == Resultado_e.Sair)
+            if (PegaString(ref NumeroDocumento, "Digite o número do documento ou S para sair") == Resultado_e.Sair)
                 return Resultado_e.Sair;
-            if (PegaString(ref NomeRua, "Digite o nome completo ou S para sair") == Resultado_e.Sair)
+            if (PegaString(ref NomeRua, "Digite o nome da rua ou S para sair") == Resultado_e.Sair)
                 return Resultado_e.Sair;
             if (PegaUint32(ref NumeroCasa, "Digite o número da casa ou S para sair") == Resultado_e.Sair)
                 return Resultado_e.Sair;
-            
             CadastroCliente cadastroCliente = new CadastroCliente(Nome, NumeroDocumento, NomeRua, NumeroCasa, DataNascimento);
             baseDados.AddCliente(cadastroCliente);
-            return Resultado_e.Sucesso;
-
             Console.Clear();
-            ImprimeMensagens("Cliente adicionado: ");
+            ImprimeMensagens("Cliente adicionado: ".ToUpper());
             ImprimeNoConsole(cadastroCliente);
-            ImprimeMensagens("");
+             Console.ReadKey();
+            Console.Clear();
+            return Resultado_e.Sucesso;
         }
         public void BuscaCliente()
         {
@@ -159,14 +158,18 @@ namespace Cadastro_users_v2._0
             string temp = Console.ReadLine();
             if (temp.ToLower() =="s")
                 return;
+
             List<CadastroCliente> tempCadastroClientes = baseDados.BuscaCliente_Doc(temp);
             Console.Clear();
             if (tempCadastroClientes != null)
             {
-                ImprimeMensagens("cliente encontrado(s): ".ToUpper() + tempCadastroClientes.Count + "\ndocumento: ".ToUpper() + temp);
+                ImprimeMensagens("cliente encontrado(s): ".ToUpper() + tempCadastroClientes.Count);
+                ImprimeNoConsole(tempCadastroClientes);
             }
             else
-                ImprimeMensagens("nenhum cliente com o document: ".ToUpper() + temp+ "foi encontrado".ToUpper());
+                ImprimeMensagens("nenhum cliente com o documento: ".ToUpper() + temp+ " foi encontrado".ToUpper());
+            Console.ReadKey();
+            Console.Clear() ;
         }
         public void ExcluiCliente()
         {
@@ -175,25 +178,26 @@ namespace Cadastro_users_v2._0
             string temp = Console.ReadLine();
             if (temp.ToLower() == "s")
                 return;
-            List<CadastroCliente> tempCadastroClientes = baseDados.ExcluiCliente_Doc(temp).Where(cliente => cliente.NumeroDocumento == temp).ToList();
+
+            List<CadastroCliente> tempCadastroClientes = baseDados.ExcluiCliente_Doc(temp);
             Console.Clear();
-            if (tempCadastroClientes != null)
+            if (tempCadastroClientes != null )
             {
                 foreach(CadastroCliente clienteExcluir in tempCadastroClientes)
                 {
-                    ImprimeMensagens("cliente encontrado(s): ".ToUpper() + tempCadastroClientes.Count + "\ndocumento: ".ToUpper() + temp);
-                    baseDados.ExcluiCliente_Doc(temp).Remove(clienteExcluir);
+                    ImprimeMensagens("cliente(s) removido(s): ".ToUpper() + tempCadastroClientes.Count + "\ndocumento: ".ToUpper() + temp);
+                    ImprimeNoConsole(tempCadastroClientes);
                 }
             }
             else
-                ImprimeMensagens("nenhum cliente com o document: ".ToUpper() + temp + "foi encontrado".ToUpper());
-            ImprimeMensagens("");
+                ImprimeMensagens("nenhum cliente com o documento: ".ToUpper() + temp + " foi encontrado".ToUpper());
+                Console.ReadKey();
+                Console.Clear();
         }
         public void Sair()
         {
             Console.Clear();
             ImprimeMensagens("Programa Encerrado...");
-            Console.ReadKey();
         }
         public void opcaoDesconhecida()
         {
@@ -227,6 +231,7 @@ namespace Cadastro_users_v2._0
                         break;
                     default:
                         opcaoDesconhecida();
+                        Console.Clear();
                         break;
                 }
             }

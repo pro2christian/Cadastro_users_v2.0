@@ -22,11 +22,11 @@ namespace Cadastro_users_v2._0
         
         public CadastroCliente (string pNome, string pNumeroDocumento, string pNomeRua , uint pNumeroCasa, DateTime pDataNascimento)
         {
-            nome = pNome;
-            numeroDocumento = pNumeroDocumento;
-            dataNascimento = pDataNascimento;
-            nomeRua = pNomeRua;
-            numeroCasa = pNumeroCasa;
+            Nome = pNome;
+            NumeroDocumento = pNumeroDocumento;
+            NomeRua = pNomeRua;
+            DataNascimento = pDataNascimento;
+            NumeroCasa = pNumeroCasa;
         }
     }
 }
