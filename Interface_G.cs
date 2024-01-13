@@ -114,7 +114,7 @@ namespace Cadastro_users_v2._0
             ImprimeMensagens("Número do Documento: " + pCliente.NumeroDocumento);
             ImprimeMensagens("Data de Nascimento: "+ pCliente.DataNascimento.ToString("dd/MM/yyyy"));
             ImprimeMensagens("Nome da Rua: "+ pCliente.NomeRua.ToUpper());
-            ImprimeMensagens("Numero da Casa: "+ pCliente.NumeroCasa);
+            ImprimeMensagens("Numero da Casa: "+ pCliente.NumeroCasa+"\n");
         }
         public void ImprimeNoConsole(List<CadastroCliente> pListaCliente)
         {
@@ -147,7 +147,7 @@ namespace Cadastro_users_v2._0
             Console.Clear();
             ImprimeMensagens("Cliente adicionado: ".ToUpper());
             ImprimeNoConsole(cadastroCliente);
-             Console.ReadKey();
+            Console.ReadKey();
             Console.Clear();
             return Resultado_e.Sucesso;
         }
@@ -199,7 +199,7 @@ namespace Cadastro_users_v2._0
             Console.Clear();
             ImprimeMensagens("Programa Encerrado...");
         }
-        public void opcaoDesconhecida()
+        public void OpcaoDesconhecida()
         {
             Console.Clear();
             ImprimeMensagens("Opção desconhecida...");
@@ -230,7 +230,7 @@ namespace Cadastro_users_v2._0
                         Sair();
                         break;
                     default:
-                        opcaoDesconhecida();
+                        OpcaoDesconhecida();
                         Console.Clear();
                         break;
                 }
