@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.IO;
 
 namespace Cadastro_users_v2._0
 {
+    [DataContract]
     internal class BaseDados
     {
-       private List<CadastroCliente> cadastroCliente;
+        [DataMember]
+        private List<CadastroCliente> cadastroCliente;
+        private string caminhoDados;
 
         public void AddCliente(CadastroCliente pCliente)
         {
             cadastroCliente.Add(pCliente);
+            Serializador.Serializador_M(caminhoDados, this);
         }
         public List<CadastroCliente> BuscaCliente_Doc( string pNumeroDocumento)
         {
@@ -36,9 +42,15 @@ namespace Cadastro_users_v2._0
             else
                 return null;
         }
-        public BaseDados()
+        
+        public BaseDados( string pCaminhoDados)
         {
-            cadastroCliente = new List<CadastroCliente>();
+            caminhoDados =pCaminhoDados;
+            BaseDados baseDadosTemp = Serializador.Desserializador(pCaminhoDados);
+            if (baseDadosTemp != null)
+                cadastroCliente = baseDadosTemp.cadastroCliente;
+            else
+                cadastroCliente = new List<CadastroCliente>();
         }
     }
 }

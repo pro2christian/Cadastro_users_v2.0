@@ -199,7 +199,7 @@ namespace Cadastro_users_v2._0
             Console.Clear();
             ImprimeMensagens("Programa Encerrado...");
         }
-        public void opcaoDesconhecida()
+        public void OpcaoDesconhecida()
         {
             Console.Clear();
             ImprimeMensagens("Opção desconhecida...");
@@ -230,7 +230,7 @@ namespace Cadastro_users_v2._0
                         Sair();
                         break;
                     default:
-                        opcaoDesconhecida();
+                        OpcaoDesconhecida();
                         Console.Clear();
                         break;
                 }
