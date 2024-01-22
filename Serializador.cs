@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.IO;
 using System.Xml;
+using System.Threading;
 
 
 namespace Cadastro_users_v2._0
@@ -21,9 +22,12 @@ namespace Cadastro_users_v2._0
             serializadorContract.WriteObject(escritorXml, pBaseDados);
             escritorXml.Flush();
             string objSerializadoStr = StringBuilder.ToString();
+            
             FileStream arquivoXml =  File.Create(pCaminhoArquivoXml);
             arquivoXml.Close();
             File.WriteAllText(pCaminhoArquivoXml, objSerializadoStr);
+            //para simular uma base de dados muito grande.
+            Thread.Sleep(10000);
             escritorXml.Close();
         }
         public static BaseDados Desserializador(string pCaminhoArquivoXml)
@@ -34,6 +38,8 @@ namespace Cadastro_users_v2._0
                 {
                     string conteudoObj = File.ReadAllText(pCaminhoArquivoXml);
                     StringReader leitorString = new StringReader(conteudoObj);
+                    //para simular uma base de dados muito grande.
+                    Thread.Sleep(10000);
                     XmlReader leitorXml = XmlReader.Create(leitorString);
                     BaseDados baseDadosTemp;
                     baseDadosTemp = (BaseDados)serializadorContract.ReadObject(leitorXml);

@@ -213,21 +213,50 @@ namespace Cadastro_users_v2._0
                 ImprimeMensagens("Digite C para cadastrar um cliente");
                 ImprimeMensagens("Digite B para buscar um cliente pelo número do documento");
                 ImprimeMensagens("Digite E para excluir um cliente pelo número do documento");
+                ImprimeMensagens("Digite H para mostrar a data e hora");
                 ImprimeMensagens("Digite S para sair");
                 temp = Console.ReadKey(true).KeyChar.ToString().ToLower();
                 switch (temp)
                 {
                     case "c":
+                        
+                        if(baseDados.BaseDisponivel() == false)
+                        {
+                            ImprimeMensagens("Base de dados indisponível... Tente novamente em alguns instantes!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
                         CadastraCliente();
                         break;
                     case "b":
+                        if (baseDados.BaseDisponivel() == false)
+                        {
+                            ImprimeMensagens("Base de dados indisponível... Tente novamente em alguns instantes!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
                         BuscaCliente();
                         break;
                     case "e":
+                        if (baseDados.BaseDisponivel() == false)
+                        {
+                            ImprimeMensagens("Base de dados indisponível... Tente novamente em alguns instantes!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
                         ExcluiCliente();
                         break;
                     case "s":
                         Sair();
+                        break;
+                    case "h":
+                        Console.Clear();
+                        ImprimeMensagens(DateTime.Now.ToString("dd/MM/yyyy: HH:mm:ss"));
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     default:
                         OpcaoDesconhecida();
